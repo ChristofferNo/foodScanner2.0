@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View,TextInput } from 'react-native'
+import { Text, StyleSheet, View, TextInput } from 'react-native'
 import React, { Component } from 'react'
 
 export default class inputBar extends Component {
