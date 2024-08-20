@@ -1,31 +1,79 @@
-import { Text, StyleSheet, View, TextInput } from 'react-native'
-import React, { Component } from 'react'
+import React, { useState } from 'react';
+import { View, TextInput, Button, FlatList, Text, StyleSheet,TouchableOpacity } from 'react-native';
 
-export default class inputBar extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.addItem}>
-        <TextInput style={styles.input} placeholder='Skriv ingridienser/matprodukter'/>
-        </View>
+export default function InputBar() {
+  // State för att lagra ingredienser
+  const [ingredients, setIngredients] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+
+  // Funktion för att lägga till en ingrediens
+  const addIngredient = () => {
+    if (inputValue.trim()) {
+      setIngredients([...ingredients, inputValue.trim()]);
+      console.log('Ingredients:', [...ingredients, inputValue.trim()]);
+      setInputValue(''); // Rensa inputfältet
+    }
+  };
+
+  // Hantera när Enter trycks på tangentbordet
+  const handleInputChange = (text) => {
+    setInputValue(text);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.addItem}>
+        <TextInput
+          style={styles.input}
+          placeholder="Skriv ingredienser/matprodukter"
+          value={inputValue}
+          onChangeText={handleInputChange}
+          onSubmitEditing={addIngredient} // Lägger till ingrediens när Enter trycks
+        />
+        <TouchableOpacity style={styles.button123} onPress={addIngredient}>
+          <Text style={styles.buttonText}>Press</Text>
+        </TouchableOpacity>
       </View>
-    )
-  }
+      <FlatList
+        data={ingredients}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => <Text style={styles.listItem}>{item}</Text>}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    addItem: {
-        backgroundColor: '#edeef0', // background: #edeef0;
-        borderRadius: 32, // border-radius: 2rem; (2rem ≈ 32px)
-        padding: 16, // padding: 0.5rem; (0.5rem ≈ 8px)
-    },
-    input: {
-        textAlign: 'center', // Motsvarar text-align: center;
-        paddingLeft: 16, // padding-left: 2rem; (1 rem = 16px, så 2rem = 32px, vi använder 16px här för att matcha standarder)
-        width: 240, // width: 15rem; (1 rem = 16px, så 15rem = 240px)
-        paddingRight: 16, // padding-right: 2rem; (samma som paddingLeft)
-        backgroundColor: 'transparent', // background: transparent;
-        borderWidth: 0, // border: none;
-        outlineWidth: 0, // outline: none; (React Native har ingen direkt motsvarighet till CSS outline)
-    },
-})
+  container: {
+    padding: 16,
+  },
+  addItem: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#edeef0',
+    borderRadius: 32,
+    padding: 16,
+    marginBottom: 16,
+  },
+  input: {
+    textAlign: 'center',
+    paddingLeft: 16,
+    width: 320,
+    outlineStyle: 'none',
+    paddingRight: 16,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+  },
+  listItem: {
+  },
+  button123: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 32,
+    elevation: 3,
+    backgroundColor: '#edeef0',
+    borderWidth: 1,
+  }
+});
