@@ -11,6 +11,7 @@ const chatGPTService = async (messages) => {
           { role: "system", content: "You are a helpful assistant." },
           ...messages,
         ],
+        model: "gpt-4o-mini",
       },
       {
         headers: {
@@ -19,7 +20,7 @@ const chatGPTService = async (messages) => {
         },
       }
     );
-
+    console.log("response", response.data.choices[0].message.content);
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error("ChatGPT API error:", error);
@@ -27,4 +28,9 @@ const chatGPTService = async (messages) => {
   }
 };
 
-export default chatGPTService;
+const recipePrompt = (groceries) => {
+  return `Here is a list of groceries: ${groceries}.\nReply with 3 recipes that can be cooked using only these groceries.
+Reply only in JSON in the format: 'recipes': [{name: 'nameOfRecipe', ingredients: [ingredient1, ...], stepsToMake: ['step1', 'step2', ...]}, {...}, {...}]`;
+};
+
+export default { chatGPTService, recipePrompt };
