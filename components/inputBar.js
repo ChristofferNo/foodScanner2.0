@@ -70,10 +70,13 @@ export default function InputBar({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    width: 400,
+    height: 1000
   },
   addItem: {
     flex: 1,
+    marginTop: 16,
+    maxHeight: 60,
     flexDirection: "row",
     backgroundColor: "#edeef0",
     borderRadius: 32,
