@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import GeneralButton from "./components/generalButton";
 import chatGPT from "./api/chatGPT";
 import recipeView from "./components/recipeView";
-import NavBar from './components/bottomNavbar'
+import NavBar from "./components/bottomNavbar";
 import HomePage from "./components/Views/homePage";
+import ScanFridgePage from "./components/Views/scanFridgePage";
 
 export default function App() {
   const generateRecipes = async () => {
@@ -30,8 +31,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <HomePage/>
-      <NavBar/>
+      <HomePage />
+      <NavBar />
     </View>
   );
 }
