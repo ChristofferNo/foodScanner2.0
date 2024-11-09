@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
-export default function HomePage() {
+export default function HomePage({ navigate }) {
   return (
     <View style={styles.homeContainer}>
       <View style={styles.upper}>
@@ -12,12 +12,17 @@ export default function HomePage() {
         <Pressable
           style={styles.btn}
           onPress={() => {
-            console.log("change view");
+            navigate("ScanFridgePage");
           }}
         >
           <Text style={styles.btnText}>Scan Fridge</Text>
         </Pressable>
-        <Pressable style={styles.btn}>
+        <Pressable
+          style={styles.btn}
+          onPress={() => {
+            navigate("ListItemsPage");
+          }}
+        >
           <Text style={styles.btnText}>Type Manually</Text>
         </Pressable>
       </View>

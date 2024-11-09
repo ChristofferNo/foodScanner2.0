@@ -3,36 +3,22 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import GeneralButton from "./components/generalButton";
 import chatGPT from "./api/chatGPT";
 import recipeView from "./components/recipeView";
+
+// component Imports
 import NavBar from "./components/bottomNavbar";
 import HomePage from "./components/Views/homePage";
 import ScanFridgePage from "./components/Views/scanFridgePage";
+import ListItemsPage from "./components/Views/listItemsPage";
 
 export default function App() {
-  const generateRecipes = async () => {
-    const recipePrompt = chatGPT.recipePrompt(ingredients);
-    console.log("ingredients prompt:", recipePrompt);
-    const chatGPTResponse = await chatGPT.chatGPTService([
-      { role: "user", content: recipePrompt },
-    ]);
-    console.log("chatGPTResponse", JSON.parse(chatGPTResponse));
-    setRecipes(JSON.parse(chatGPTResponse));
-  };
-
-  const [ingredients, setIngredients] = useState([]);
-  const [recipes, setRecipes] = useState([]);
-
-  // Lägg till / ta bort ingrediemter i state
-  const addIngredient = (newIngredient) => {
-    setIngredients([...ingredients, newIngredient]);
-  };
-  const deleteIngredient = (updatedIngredients) => {
-    setIngredients(updatedIngredients);
-  };
+  const [page, setPage] = useState("HomePage");
+  const pageMap = { HomePage, ScanFridgePage, ListItemsPage };
+  const ActivePage = pageMap[page];
 
   return (
     <View style={styles.container}>
-      <HomePage />
-      <NavBar />
+      <ActivePage navigate={setPage} />
+      <NavBar navigate={setPage} />
     </View>
   );
 }
