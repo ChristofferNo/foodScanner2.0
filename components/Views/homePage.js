@@ -20,7 +20,7 @@ export default function HomePage({ navigate }) {
         <Pressable
           style={styles.btn}
           onPress={() => {
-            navigate("ListItemsPage");
+            navigate("AddIngredient");
           }}
         >
           <Text style={styles.btnText}>Type Manually</Text>

@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 const { width } = Dimensions.get("window");
 
-export default function AddIngredient() {
+export default function AddIngredient({navigate}) {
     const [modalVisible, setModalVisible] = useState(false);
     const slideAnim = useRef(new Animated.Value(width)).current;  // Flyttad till useRef
 
