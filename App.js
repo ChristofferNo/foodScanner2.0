@@ -5,6 +5,8 @@ import chatGPT from "./api/chatGPT";
 import recipeView from "./components/recipeView";
 import NavBar from './components/bottomNavbar'
 import HomePage from "./components/Views/homePage";
+import AddIngredient from "./components/Views/manuallyAddIngridients";
+
 
 export default function App() {
   const generateRecipes = async () => {
@@ -30,7 +32,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <HomePage/>
+      <AddIngredient/>
       <NavBar/>
     </View>
   );
