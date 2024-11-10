@@ -11,7 +11,6 @@ import ScanFridgePage from "./components/Views/scanFridgePage";
 import ListItemsPage from "./components/Views/listItemsPage";
 import AddIngredient from "./components/Views/manuallyAddIngridients";
 
-
 export default function App() {
   const [page, setPage] = useState("HomePage");
   const pageMap = { HomePage, ScanFridgePage, ListItemsPage };
@@ -19,8 +18,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <HomePage/>
-      <NavBar/>
+      <ActivePage navigate={setPage} />
+      <NavBar navigate={setPage} />
     </View>
   );
 }
