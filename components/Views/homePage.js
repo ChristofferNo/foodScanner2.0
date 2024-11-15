@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "lightgrey",
     borderStyle: "dashed",
-    borderRadius: 16,
+    borderRadius: 8,
 
     paddingVertical: 8,
     paddingHorizontal: 16,

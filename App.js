@@ -8,7 +8,7 @@ import recipeView from "./components/recipeView";
 import NavBar from "./components/bottomNavbar";
 import HomePage from "./components/Views/homePage";
 import ScanFridgePage from "./components/Views/scanFridgePage";
-import AddIngredient from "./components/Views/manuallyAddIngridients";
+import AddIngredient from "./components/Views/addIngridients";
 
 export default function App() {
   const [page, setPage] = useState("HomePage");
