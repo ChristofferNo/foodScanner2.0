@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import GeneralButton from "./components/generalButton";
-import chatGPT from "./api/chatGPT";
-import recipeView from "./components/recipeView";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // component Imports
 import NavBar from "./components/bottomNavbar";
@@ -16,15 +14,21 @@ export default function App() {
   const ActivePage = pageMap[page];
 
   return (
-    <View style={styles.container}>
-      <ActivePage navigate={setPage} />
-      <NavBar navigate={setPage} />
-    </View>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <View style={styles.container}>
+        <ActivePage navigate={setPage} />
+        <NavBar navigate={setPage} />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignItems: "center",
+  },
+  safeAreaContainer: {
     flex: 1,
     alignItems: "center",
   },
