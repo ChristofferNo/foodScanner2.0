@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
 export default function NavBar({ navigate }) {
-
-  
   return (
     <View style={styles.navBar}>
       <Pressable
@@ -58,8 +56,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingTop: 12,
     paddingBottom: 32,
-    position: "absolute",
-    bottom: 0,
     width: "100%",
 
     borderWidth: 1,

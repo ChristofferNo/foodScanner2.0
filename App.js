@@ -9,15 +9,24 @@ import ScanFridgePage from "./components/Views/scanFridgePage";
 import AddIngredient from "./components/Views/addIngridients";
 
 export default function App() {
+  // Navigation logic -------
   const [page, setPage] = useState("HomePage");
   const pageMap = { HomePage, ScanFridgePage, AddIngredient };
   const ActivePage = pageMap[page];
+  // ---------------------------------
+
+  // Navbar logic -------
+  const [showNavbar, setShowNavbar] = useState(true);
+  // -----------------------------
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
-        <ActivePage navigate={setPage} />
-        <NavBar navigate={setPage} />
+        {/* Render different components (Navigation logic) */}
+        <ActivePage navigate={setPage} showNavbar={setShowNavbar} />
+
+        {/* Conditionally Render Navbar */}
+        {showNavbar && <NavBar style={styles.navbar} navigate={setPage} />}
       </View>
     </SafeAreaView>
   );
