@@ -41,5 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: "center", // Centrerar innehållet vertikalt
     alignItems: "center", // Centrerar innehållet horisontellt
     width: "100%",
+
+    borderWidth: 4,
+    borderBlockColor: "red",
   },
 });
