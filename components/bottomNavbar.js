@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingTop: 12,
     paddingBottom: 32,
-    position: "absolute",
-    bottom: 0,
     width: "100%",
 
     borderWidth: 1,
