@@ -5,14 +5,27 @@ import {
   Button,
   Pressable,
   Dimensions,
+  Image,
 } from "react-native";
-import { useEffect } from "react";
-import { useCameraPermissions, CameraView } from "expo-camera";
+import { useEffect, useRef, useState } from "react";
+import {
+  useCameraPermissions,
+  CameraView,
+  takePictureAsync,
+} from "expo-camera";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const { width } = Dimensions.get("window");
 
 export default function ScanFridgePage({ showNavbar, navigate }) {
+  const [photoUri, setPhotoUri] = useState(null);
+
+  const cameraRef = useRef(null);
+  async function takePhoto() {
+    const photo = await cameraRef.current.takePictureAsync();
+    setPhotoUri(photo.uri);
+  }
+
   useEffect(() => {
     // Hide navbar when using camera
     showNavbar(false);
@@ -53,14 +66,26 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
         <Icon name="chevron-back-outline" size={24} />
         <Text>Go Back</Text>
       </Pressable>
-
-      <CameraView
-        style={[styles.camera, { minWidth: width }]}
-        facing="back"
-      ></CameraView>
-      <Pressable style={styles.btn}>
-        <Icon name="camera" size={32} color={"lightgrey"}></Icon>
-      </Pressable>
+      {!photoUri && (
+        <View style={styles.cameraContainer}>
+          <CameraView
+            style={[styles.camera, { minWidth: width }]}
+            facing="back"
+            ref={cameraRef}
+          ></CameraView>
+          <Pressable style={styles.btn} onPress={() => takePhoto()}>
+            <Icon name="camera" size={32} color={"lightgrey"}></Icon>
+          </Pressable>{" "}
+        </View>
+      )}
+      {photoUri && (
+        <View style={styles.photoContainer}>
+          <Image
+            style={{ minWidth: width, flex: 0.8 }}
+            source={{ uri: photoUri }}
+          ></Image>
+        </View>
+      )}
     </View>
   );
 }
@@ -75,6 +100,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly", // Centrerar innehållet vertikalt
     alignItems: "center", // Centrerar innehållet horisontellt
     width: "100%",
+  },
+  cameraContainer: {
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
   btn: {
     justifyContent: "center",
@@ -92,5 +122,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
+  },
+  photoContainer: {
+    flex: 1,
   },
 });
