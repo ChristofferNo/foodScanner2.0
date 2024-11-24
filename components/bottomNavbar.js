@@ -4,50 +4,31 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 export default function NavBar({ navigate }) {
 
+  const navIcons = [
+    { id: "Home", icon: "home-outline", navigation: "HomePage" },
+    { id: "Explore", icon: "search-outline", navigation: "ExplorePage" },
+    { id: "Saved", icon: "bookmark-outline", navigation: "SavedPage" },
+    { id: "Profile", icon: "person-outline", navigation: "ProfilePage" },
+  ];
   
   return (
     <View style={styles.navBar}>
+    {navIcons.map((item => (
       <Pressable
-        style={styles.navItem}
-        onPress={() => {
-          navigate("HomePage");
-        }}
-      >
-        <Icon
-          name="home-outline"
-          size={24}
-          color="#333"
-          style={styles.navIcon}
-        />
-        <Text style={styles.navText}>Home</Text>
-      </Pressable>
-      <Pressable style={styles.navItem}>
-        <Icon
-          name="search-outline"
-          size={24}
-          color="#333"
-          style={styles.navIcon}
-        />
-        <Text style={styles.navText}>Explore</Text>
-      </Pressable>
-      <Pressable style={styles.navItem}>
-        <Icon
-          name="bookmark-outline"
-          size={24}
-          color="#333"
-          style={styles.navIcon}
-        />
-        <Text style={styles.navText}>Saved</Text>
-      </Pressable>
-      <Pressable style={styles.navItem}>
-        <Icon
-          name="person-outline"
-          size={24}
-          color="#333"
-          style={styles.navIcon}
-        />
-        <Text style={styles.navText}>Profile</Text>
-      </Pressable>
+      style={styles.navItem}
+      onPress={() => {
+        navigate(item.navigation);
+      }}
+    >
+      <Icon
+        name={item.icon}
+        size={24}
+        color="#333"
+        style={styles.navIcon}
+      />
+      <Text style={styles.navText}>{item.id}</Text>
+    </Pressable>
+    )))}
     </View>
   );
 }

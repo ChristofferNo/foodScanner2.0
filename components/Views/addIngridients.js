@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable, Modal, Dimensions, Animated, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
-
 const { width } = Dimensions.get("window");
 
 export default function AddIngredient({ navigate }) {
@@ -29,8 +28,8 @@ export default function AddIngredient({ navigate }) {
     };
 
     const [text, setText] = useState('');
-    const [modalIngredients, setIngredients] = useState([]);
-    const [ingredients, setIngredientsState] = useState([]);
+    const [modalIngredients, setModalIngredients] = useState([]); // Temporary ingredients list in the modal
+    const [ingredients, setIngredientsState] = useState([]); // Main list of ingredients
 
     useEffect(() => {
         if (modalIngredients.length > 0) {
@@ -38,60 +37,56 @@ export default function AddIngredient({ navigate }) {
         }
     }, [modalIngredients]);
 
+    // Add an ingredient with a unique ID
     const pushItem = () => {
         if (text.trim()) {
-            setIngredients(prevIngredients => [...prevIngredients, text]);
+            setModalIngredients(prevIngredients => [
+                ...prevIngredients,
+                { id: Date.now().toString(), name: text } // Create an object with a unique ID and the text
+            ]);
             setText('');
         }
     };
 
-    const sliceItem = (ingredientToRemove, setArrayState) => {
+    // Remove an ingredient by its ID
+    const sliceItem = (id, setArrayState) => {
         setArrayState(prevIngredients =>
-            prevIngredients.filter(ingredient => ingredient !== ingredientToRemove)
+            prevIngredients.filter(ingredient => ingredient.id !== id) // Filter by ID instead of text
         );
-        console.log(`Removed: ${ingredientToRemove}`);
     };
 
+    // Save ingredients from modal to the main list
     const saveModalArray = () => {
         setIngredientsState(prevIngredients => [...prevIngredients, ...modalIngredients]);
-        console.log("Updated realIngredients:", ingredients); // Uppdaterat state kommer inte synas direkt här
-        setIngredients([]);
+        console.log("Updated realIngredients:", ingredients); // Note: Updated state won't appear immediately here
+        setModalIngredients([]); // Clear modal ingredients
         closeModal();
     };
 
-
     return (
         <View style={styles.container}>
-
-
             <View style={styles.upper}>
-                <View style={styles.goBack}>
-                    <Pressable onPress={() => {
+                <Pressable
+                    style={styles.goBack}
+                    onPress={() => {
                         navigate("HomePage");
                     }}>
-                        <Icon
-                            name="chevron-back-outline"
-                            size={24}
-                            // style={styles.closeBtn}
-                        />
-                    </Pressable>
+                    <Icon
+                        name="chevron-back-outline"
+                        size={24}
+                    />
                     <Text>Go Back</Text>
-                </View>
-                <View style={styles.stepText}>
-                    <Text style={styles.upperText}>Step 1:</Text>
-                    <Text style={styles.upperText}>Add ingredients</Text>
-                </View>
+                </Pressable>
             </View>
-
 
             <View style={styles.middle}>
                 <Text style={styles.middleHeader}>Items In Your Fridge</Text>
-                {ingredients.map((items, index) => (
-                    <View key={index} style={styles.ingredientCard}>
+                {ingredients.map((item) => (
+                    <View key={item.id} style={styles.ingredientCard}>
                         <Text style={styles.ingredientText}>
-                            {items}
+                            {item.name}
                         </Text>
-                        <Pressable onPress={() => sliceItem(items, setIngredientsState)}>
+                        <Pressable onPress={() => sliceItem(item.id, setIngredientsState)}>
                             <Icon
                                 name="close-outline"
                                 size={24}
@@ -100,16 +95,19 @@ export default function AddIngredient({ navigate }) {
                     </View>
                 ))}
 
-
                 <Pressable onPress={openModal} style={styles.btn}>
                     <Text>Add item</Text>
                 </Pressable>
             </View>
             <View style={styles.lower}>
-                <Text>P</Text>
+                <Text>Next step: </Text>
+                <Text>Choose filter and load recipe</Text>
+                <Pressable>
+                    <Text style={styles.btnIcon}>&rarr;</Text>
+                </Pressable>
             </View>
 
-            {/* Modal-komponenten */}
+            {/* Modal */}
             <Modal
                 transparent
                 visible={modalVisible}
@@ -151,12 +149,12 @@ export default function AddIngredient({ navigate }) {
                     <View style={styles.modalIngredientContainer}>
                         <Text>Add Ingredients ({modalIngredients.length})</Text>
                         <View style={styles.modalIngredientContainer}>
-                            {modalIngredients.map((ingredient, index) => (
-                                <View style={styles.ingredientCard}>
-                                    <Text key={index} style={styles.ingredientText}>
-                                        {ingredient}
+                            {modalIngredients.map((ingredient) => (
+                                <View key={ingredient.id} style={styles.ingredientCard}>
+                                    <Text style={styles.ingredientText}>
+                                        {ingredient.name}
                                     </Text>
-                                    <Pressable onPress={() => sliceItem(ingredient, setIngredients)}>
+                                    <Pressable onPress={() => sliceItem(ingredient.id, setModalIngredients)}>
                                         <Icon
                                             name="close-outline"
                                             size={24}
@@ -166,12 +164,12 @@ export default function AddIngredient({ navigate }) {
                             ))}
                         </View>
                     </View>
-
                 </Animated.View>
             </Modal>
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -183,7 +181,7 @@ const styles = StyleSheet.create({
         flex: 2
     },
 
-    goBack : {
+    goBack: {
         flexDirection: "row",
         alignItems: 'center',
         width: "100%",
@@ -204,6 +202,7 @@ const styles = StyleSheet.create({
         flex: 4,
     },
     middleHeader: {
+        marginBottom: 32,
         fontSize: 20,
         fontWeight: 'bold',
     },
