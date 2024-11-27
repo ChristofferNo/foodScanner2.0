@@ -8,14 +8,20 @@ import {
   Dimensions,
   Animated,
   TextInput,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
-import { Platform } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
 export default function AddIngredient({ navigate }) {
+  const insets = useSafeAreaInsets(); // Get safe area padding values
+  const containerPadding = 32;
+  const modalInset = 32 + insets.top;
+
+  console.log("modalInset", modalInset);
+
   const [modalVisible, setModalVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(width)).current;
 
@@ -79,7 +85,7 @@ export default function AddIngredient({ navigate }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { padding: containerPadding }]}>
       <View style={styles.upper}>
         <Pressable
           style={styles.goBack}
@@ -127,6 +133,7 @@ export default function AddIngredient({ navigate }) {
           style={[
             styles.modalContainer,
             { transform: [{ translateX: slideAnim }] },
+            { paddingVertical: 94 },
           ]}
         >
           <View style={styles.closeCheckContainer}>
@@ -183,7 +190,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    padding: 32,
   },
   upper: {
     flex: 2,
@@ -258,10 +264,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
     width: "100%",
     height: "100%",
-    paddingVertical: Platform.select({
-        ios: 96, 
-        android: 48, 
-      }),
     paddingHorizontal: 32,
   },
 
@@ -269,6 +271,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 16,
+    marginTop: 16,
   },
   closeBtn: {
     marginLeft: 12,
