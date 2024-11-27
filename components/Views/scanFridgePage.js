@@ -91,6 +91,7 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
 }
 
 const styles = StyleSheet.create({
+  
   camera: {
     flex: 0.8,
     minWidth: 300,
