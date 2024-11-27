@@ -100,11 +100,12 @@ export default function AddIngredient({ navigate }) {
                 </Pressable>
             </View>
             <View style={styles.lower}>
-                <Text>Next step: </Text>
-                <Text>Choose filter and load recipe</Text>
-                <Pressable>
+                <View style={styles.btnTextContainer} > 
+                <Text style={styles.lowerText}>Choose filter and load recipe</Text>
+                <Pressable style={styles.nextStepBtn}>
                     <Text style={styles.btnIcon}>&rarr;</Text>
                 </Pressable>
+                </View>
             </View>
 
             {/* Modal */}
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         width: "100%",
-        marginTop: 62,
+        marginTop: 16,
         backgroundColor: "white"
     },
 
@@ -206,10 +207,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
     },
-    lower: {
-        flex: 2,
-        backgroundColor: '#fce47c',
-    },
     btn: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -223,6 +220,30 @@ const styles = StyleSheet.create({
         marginTop: 32,
         width: '40%',
     },
+
+    lower: {
+        flex: 2,
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end'
+    },
+    btnTextContainer: {
+        width: 126,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    lowerText : {
+        textAlign: "center",
+        marginBottom: 16,
+    },
+    nextStepBtn: {
+        alignItems: 'center',
+        backgroundColor: 'lightgrey',
+        paddingVertical: 4,
+        width: "60%",
+        borderRadius: 16,
+    },
+
+   
 
     //MODAL STYLING
 

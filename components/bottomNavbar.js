@@ -38,12 +38,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     paddingTop: 12,
-    paddingBottom: 32,
     width: "100%",
 
-    borderWidth: 1,
-    borderColor: "lightgrey",
-    borderStyle: "dashed",
+    borderTopWidth: 1,        // Lägg till en top-border med tjockleken 1
+    borderTopColor: "lightgrey", // Färgen på top-border
+    borderTopStyle: "dashed",
   },
   navIcon: {
     marginBottom: 8,
