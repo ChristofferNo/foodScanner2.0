@@ -133,7 +133,7 @@ export default function AddIngredient({ navigate }) {
           style={[
             styles.modalContainer,
             { transform: [{ translateX: slideAnim }] },
-            { paddingVertical: 94 },
+            { paddingVertical: modalInset },
           ]}
         >
           <View style={styles.closeCheckContainer}>
