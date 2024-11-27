@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     paddingTop: 12,
+    paddingBottom: 16,
     width: "100%",
 
     borderTopWidth: 1,        // Lägg till en top-border med tjockleken 1
