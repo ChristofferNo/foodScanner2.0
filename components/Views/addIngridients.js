@@ -10,6 +10,7 @@ import {
   TextInput,
   SafeAreaView
 } from "react-native";
+import { Platform } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
 const { width } = Dimensions.get("window");
@@ -257,8 +258,11 @@ const styles = StyleSheet.create({
     zIndex: 10,
     width: "100%",
     height: "100%",
+    paddingVertical: Platform.select({
+        ios: 96, 
+        android: 48, 
+      }),
     paddingHorizontal: 32,
-    paddingVertical: 48,
   },
 
   closeCheckContainer: {
