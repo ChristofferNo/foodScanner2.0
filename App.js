@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 // component Imports
 import NavBar from "./components/bottomNavbar";
@@ -20,15 +20,17 @@ export default function App() {
   // -----------------------------
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <View style={styles.container}>
-        {/* Render different components (Navigation logic) */}
-        <ActivePage navigate={setPage} showNavbar={setShowNavbar} />
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.safeAreaContainer}>
+        <View style={styles.container}>
+          {/* Render different components (Navigation logic) */}
+          <ActivePage navigate={setPage} showNavbar={setShowNavbar} />
 
-        {/* Conditionally Render Navbar */}
-        {showNavbar && <NavBar style={styles.navbar} navigate={setPage} />}
-      </View>
-    </SafeAreaView>
+          {/* Conditionally Render Navbar */}
+          {showNavbar && <NavBar style={styles.navbar} navigate={setPage} />}
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
@@ -36,11 +38,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    width: '100%',
-    backgroundColor: 'white',
+    width: "100%",
+    backgroundColor: "white",
   },
   safeAreaContainer: {
-    
     flex: 1,
     alignItems: "center",
   },
