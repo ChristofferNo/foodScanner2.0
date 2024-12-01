@@ -4,9 +4,9 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 // component Imports
 import NavBar from "./components/bottomNavbar";
-import HomePage from "./components/Views/homePage";
-import ScanFridgePage from "./components/Views/scanFridgePage";
-import AddIngredient from "./components/Views/addIngridients";
+import HomePage from "./Views/homePage";
+import ScanFridgePage from "./Views/scanFridgePage";
+import AddIngredient from "./Views/addIngridients";
 
 export default function App() {
   // Navigation logic -------
