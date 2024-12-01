@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import Container from "../container";
 
 export default function HomePage({ navigate }) {
   return (
+    <Container>
     <View style={styles.homeContainer}>
       <View style={styles.upper}>
         <Text style={styles.headerElement}>Good Morning!</Text>
@@ -27,6 +29,7 @@ export default function HomePage({ navigate }) {
         </Pressable>
       </View>
     </View>
+    </Container>
   );
 }
 
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
   lower: {
     flex: 3,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     width: "80%",
   },
 

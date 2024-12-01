@@ -116,7 +116,12 @@ export default function AddIngredient({ navigate }) {
       <View style={styles.lower}>
         <View style={styles.btnTextContainer}>
           <Text style={styles.lowerText}>Choose filter and load recipe</Text>
-          <Pressable style={styles.nextStepBtn}>
+          <Pressable 
+            style={styles.nextStepBtn}
+            onPress={() => {
+                navigate("ChooseFilter");
+              }}
+            >
             <Text style={styles.btnIcon}>&rarr;</Text>
           </Pressable>
         </View>

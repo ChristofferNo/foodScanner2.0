@@ -11,7 +11,7 @@ import AddIngredient from "./Views/addIngridients";
 export default function App() {
   // Navigation logic -------
   const [page, setPage] = useState("HomePage");
-  const pageMap = { HomePage, ScanFridgePage, AddIngredient };
+  const pageMap = { HomePage, ScanFridgePage, AddIngredient, ChooseFilter};
   const ActivePage = pageMap[page];
   // ---------------------------------
 

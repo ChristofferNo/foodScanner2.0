@@ -7,6 +7,15 @@ export default function GeneralButton(props) {
       <Pressable style={styles.button} onPress={onPress}>
         <Text>{title}</Text>
       </Pressable>
+
+      <Pressable
+          style={styles.btn}
+          onPress={() => {
+            navigate();
+          }}
+        >
+          <Text style={styles.btnText}></Text>
+        </Pressable>
     </View>
   );
 }
@@ -18,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
-  button: {
+  btn: {
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 12,
