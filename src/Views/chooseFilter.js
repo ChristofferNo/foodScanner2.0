@@ -95,12 +95,13 @@ export default function ChooseFilter({ navigate }) {
         showsHorizontalScrollIndicator={false}
         style={styles.horizontalScroll}
         >
-          {cuisines.slice(0, 10).map((item) => (
+          {cuisines.slice(0, 15).map((item) => (
             <View
               key={item.id}
               style={[
                 styles.cuisineCard,
                 item.id === 1 && styles.first, // Lägg till extra stil för första elementet
+                item.id === 15 && styles.last,
               ]}
             >
               <Text>{item.name}</Text>
@@ -131,9 +132,11 @@ export default function ChooseFilter({ navigate }) {
       </View>
       
       <View style={styles.options}>
-          <View>
-            <Text>Dish</Text>
-          </View>
+          <View style={styles.dishOptions}>
+            <Text style={styles.dishOptionsText}>Dish</Text>
+          </View> 
+          <Icon name="people-outline" size={24}></Icon>
+          <Icon name="time-outline" size={24}></Icon>
       </View>
     </View>
   );
@@ -171,12 +174,16 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
   },
 
   first: {
     marginLeft: 32,
+  },
+
+  last: {
+    marginRight: 28,
   },
 
   horizontalScroll: {
@@ -189,10 +196,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 100,
     width: 100,
-    paddingHorizontal: 8,
     marginRight: 4,
     borderRadius: 8,
   },
+
+  //---------Filter----------// 
 
   filter: {
     paddingHorizontal: 32,
@@ -220,9 +228,18 @@ const styles = StyleSheet.create({
   },
 
 
+  //--------- Options ----------// 
 
   options: {
+    paddingHorizontal: 32,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
 
+  dishOptionsText: {
+    fontWeight: "bolder",
+    fontSize: 16
   }
 
 });

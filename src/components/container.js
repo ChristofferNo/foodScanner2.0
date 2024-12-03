@@ -6,8 +6,6 @@ export default function Container({children}) {
     <View style={styles.container}>
       {children}
     </View>
-
-    
   )
 }
 

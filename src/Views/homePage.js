@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Container from "../components/container";
 import GeneralButton from "../components/generalButton";
-import Container from "../components/container";
 
 export default function HomePage({ navigate }) {
   return (
@@ -24,30 +23,6 @@ export default function HomePage({ navigate }) {
         />
       </View>
     </View>
-      <View style={styles.homeContainer}>
-        <View style={styles.upper}>
-          <Text style={styles.headerElement}>Good Morning!</Text>
-          <Text style={styles.text}>Find todays recipe</Text>
-        </View>
-        <View style={styles.lower}>
-          <Pressable
-            style={styles.btn}
-            onPress={() => {
-              navigate("ScanFridgePage");
-            }}
-          >
-            <Text style={styles.btnText}>Scan Fridge</Text>
-          </Pressable>
-          <Pressable
-            style={styles.btn}
-            onPress={() => {
-              navigate("AddIngredient");
-            }}
-          >
-            <Text style={styles.btnText}>Type Manually</Text>
-          </Pressable>
-        </View>
-      </View>
     </Container>
   );
 }
