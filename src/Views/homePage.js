@@ -1,10 +1,29 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Container from "../components/container";
+import GeneralButton from "../components/generalButton";
+import Container from "../components/container";
 
 export default function HomePage({ navigate }) {
   return (
     <Container>
+    <View style={styles.homeContainer}>
+      <View style={styles.upper}>
+        <Text style={styles.headerElement}>Good Morning!</Text>
+        <Text style={styles.text}>Find todays recipe</Text>
+      </View>
+      <View style={styles.lower}>
+        <GeneralButton
+            title="Scan Fridge"
+            onPress={() => navigate("ScanFridgePage")}
+        />
+
+        <GeneralButton
+            title="Type manually"
+            onPress={() => navigate("AddIngredient")}
+        />
+      </View>
+    </View>
       <View style={styles.homeContainer}>
         <View style={styles.upper}>
           <Text style={styles.headerElement}>Good Morning!</Text>
@@ -51,8 +70,8 @@ const styles = StyleSheet.create({
   lower: {
     flex: 3,
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: "80%",
+    justifyContent: "space-evenly",
+    width: "100%",
   },
 
   headerElement: {
@@ -65,20 +84,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
-  btn: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 40,
-    borderWidth: 1,
-    borderColor: "lightgrey",
-    borderStyle: "dashed",
-    borderRadius: 8,
 
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: 32,
-  },
-  btnText: {
-    fontSize: 16,
-  },
 });

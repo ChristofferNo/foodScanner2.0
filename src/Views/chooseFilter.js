@@ -110,6 +110,7 @@ export default function ChooseFilter({ navigate }) {
       </View>
 
       <View style={styles.filter}>
+
       <View style={[styles.textContainer, styles.filterTextContainer]}>
           <Text style={styles.header}>Filter</Text>
           <Pressable>
@@ -129,7 +130,11 @@ export default function ChooseFilter({ navigate }) {
         </View>
       </View>
       
-      <View style={styles.options}></View>
+      <View style={styles.options}>
+          <View>
+            <Text>Dish</Text>
+          </View>
+      </View>
     </View>
   );
 }

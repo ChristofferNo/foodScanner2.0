@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import GeneralButton from "../components/generalButton";
 
 const { width } = Dimensions.get("window");
 
@@ -109,9 +110,11 @@ export default function AddIngredient({ navigate }) {
           </View>
         ))}
 
-        <Pressable onPress={openModal} style={styles.btn}>
-          <Text>Add item</Text>
-        </Pressable>
+        <GeneralButton
+          title="Add item"
+          onPress={openModal}
+        />
+
       </View>
       <View style={styles.lower}>
         <View style={styles.btnTextContainer}>
@@ -224,20 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  btn: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 40,
-    borderWidth: 1,
-    borderColor: "lightgrey",
-    borderStyle: "dashed",
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: 32,
-    width: "40%",
-  },
-
+  
   lower: {
     flex: 2,
     alignItems: "flex-end",

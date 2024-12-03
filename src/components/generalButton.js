@@ -4,36 +4,28 @@ export default function GeneralButton(props) {
   const { onPress, title } = props;
   return (
     <View>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text>{title}</Text>
-      </Pressable>
-
-      <Pressable
-          style={styles.btn}
-          onPress={() => {
-            navigate();
-          }}
-        >
-          <Text style={styles.btnText}></Text>
-        </Pressable>
+     <Pressable style={styles.btn} onPress={onPress}>
+      <Text style={styles.btnText}>{title}</Text>
+    </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
   btn: {
-    alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 32,
-    elevation: 3,
-    backgroundColor: "#edeef0",
+    alignItems: "center",
+    height: 40,
+    borderWidth: 1,
+    borderColor: "lightgrey",
+    borderStyle: "dashed",
+    borderRadius: 8,
+
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginTop: 32,
+  },
+  btnText: {
+    fontSize: 16,
   },
 });
