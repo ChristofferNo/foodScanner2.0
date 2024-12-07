@@ -21,8 +21,6 @@ export default function AddIngredient({ navigate }) {
   const containerPadding = 32;
   const modalInset = 32 + insets.top;
 
-  console.log("modalInset", modalInset);
-
   const [modalVisible, setModalVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(width)).current;
 
@@ -110,21 +108,17 @@ export default function AddIngredient({ navigate }) {
           </View>
         ))}
 
-        <GeneralButton
-          title="Add item"
-          onPress={openModal}
-        />
-
+        <GeneralButton title="Add item" onPress={openModal} />
       </View>
       <View style={styles.lower}>
         <View style={styles.btnTextContainer}>
           <Text style={styles.lowerText}>Choose filter and load recipe</Text>
-          <Pressable 
+          <Pressable
             style={styles.nextStepBtn}
             onPress={() => {
-                navigate("ChooseFilter");
-              }}
-            >
+              navigate("ChooseFilter");
+            }}
+          >
             <Text style={styles.btnIcon}>&rarr;</Text>
           </Pressable>
         </View>
@@ -227,7 +221,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  
+
   lower: {
     flex: 2,
     alignItems: "flex-end",

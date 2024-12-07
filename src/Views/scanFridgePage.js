@@ -69,13 +69,13 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
       {!photoUri && (
         <View style={styles.cameraContainer}>
           <CameraView
-            style={[styles.camera, { minWidth: width }]}
+            style={{ minWidth: width, flex: 0.8 }}
             facing="back"
             ref={cameraRef}
           ></CameraView>
           <Pressable style={styles.btn} onPress={() => takePhoto()}>
             <Icon name="camera" size={32} color={"lightgrey"}></Icon>
-          </Pressable>{" "}
+          </Pressable>
         </View>
       )}
       {photoUri && (
@@ -84,6 +84,14 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
             style={{ minWidth: width, flex: 0.8 }}
             source={{ uri: photoUri }}
           ></Image>
+          <View style={styles.photoBtns}>
+            <Pressable style={styles.btn} onPress={() => {}}>
+              <Icon name="reload" size={32} color={"lightgrey"}></Icon>
+            </Pressable>
+            <Pressable style={styles.btn} onPress={() => {}}>
+              <Icon name="arrow-forward" size={32} color={"lightgrey"}></Icon>
+            </Pressable>
+          </View>
         </View>
       )}
     </View>
@@ -91,11 +99,6 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
 }
 
 const styles = StyleSheet.create({
-  
-  camera: {
-    flex: 0.8,
-    minWidth: 300,
-  },
   scanFridgeContainer: {
     flex: 1, // Gör att container fyller hela skärmen
     justifyContent: "space-evenly", // Centrerar innehållet vertikalt
@@ -107,6 +110,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
   },
+  photoContainer: {
+    flex: 1,
+    justifyContent: "space-evenly",
+  },
+  photoBtns: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+
   btn: {
     justifyContent: "center",
     alignItems: "center",
@@ -123,8 +135,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-  },
-  photoContainer: {
-    flex: 1,
   },
 });
