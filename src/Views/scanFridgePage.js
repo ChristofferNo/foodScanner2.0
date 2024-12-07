@@ -18,12 +18,12 @@ import Icon from "react-native-vector-icons/Ionicons";
 const { width } = Dimensions.get("window");
 
 export default function ScanFridgePage({ showNavbar, navigate }) {
-  const [photoUri, setPhotoUri] = useState(null);
+  const [pictureUri, setPictureUri] = useState(null);
 
   const cameraRef = useRef(null);
-  async function takePhoto() {
-    const photo = await cameraRef.current.takePictureAsync();
-    setPhotoUri(photo.uri);
+  async function takePicture() {
+    const picture = await cameraRef.current.takePictureAsync();
+    setPictureUri(picture.uri);
   }
 
   useEffect(() => {
@@ -66,25 +66,25 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
         <Icon name="chevron-back-outline" size={24} />
         <Text>Go Back</Text>
       </Pressable>
-      {!photoUri && (
+      {!pictureUri && (
         <View style={styles.cameraContainer}>
           <CameraView
             style={{ minWidth: width, flex: 0.8 }}
             facing="back"
             ref={cameraRef}
           ></CameraView>
-          <Pressable style={styles.btn} onPress={() => takePhoto()}>
+          <Pressable style={styles.btn} onPress={() => takePicture()}>
             <Icon name="camera" size={32} color={"lightgrey"}></Icon>
           </Pressable>
         </View>
       )}
-      {photoUri && (
-        <View style={styles.photoContainer}>
+      {pictureUri && (
+        <View style={styles.pictureContainer}>
           <Image
             style={{ minWidth: width, flex: 0.8 }}
-            source={{ uri: photoUri }}
+            source={{ uri: pictureUri }}
           ></Image>
-          <View style={styles.photoBtns}>
+          <View style={styles.pictureBtns}>
             <Pressable style={styles.btn} onPress={() => {}}>
               <Icon name="reload" size={32} color={"lightgrey"}></Icon>
             </Pressable>
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
   },
-  photoContainer: {
+  pictureContainer: {
     flex: 1,
     justifyContent: "space-evenly",
   },
-  photoBtns: {
+  pictureBtns: {
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
