@@ -7,68 +7,11 @@ import {
   ScrollView, // Import från react-native, inte react-native-web
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import NextStepBtn from "../components/nextStepButton";
+import TestPage from "./testPage";
+import { cuisines, filters } from "../models/cusineFilterData";
 
 export default function ChooseFilter({ navigate }) {
-  const cuisines = [
-    { id: 1, name: "Asian" },
-    { id: 2, name: "Italian" },
-    { id: 3, name: "Mexican" },
-    { id: 4, name: "Indian" },
-    { id: 5, name: "Thai" },
-    { id: 6, name: "Japanese" },
-    { id: 7, name: "Chinese" },
-    { id: 8, name: "French" },
-    { id: 9, name: "Greek" },
-    { id: 10, name: "Lebanese" },
-    { id: 11, name: "American" },
-    { id: 12, name: "Spanish" },
-    { id: 13, name: "Vietnamese" },
-    { id: 14, name: "Turkish" },
-    { id: 15, name: "Korean" },
-    { id: 16, name: "Brazilian" },
-    { id: 17, name: "German" },
-    { id: 18, name: "Moroccan" },
-    { id: 19, name: "Ethiopian" },
-    { id: 20, name: "Caribbean" },
-    { id: 21, name: "Filipino" },
-    { id: 22, name: "Russian" },
-    { id: 23, name: "Polish" },
-    { id: 24, name: "Peruvian" },
-    { id: 25, name: "African" },
-    { id: 26, name: "Portuguese" },
-    { id: 27, name: "Swedish" },
-    { id: 28, name: "Danish" },
-    { id: 29, name: "Norwegian" },
-    { id: 30, name: "Finnish" },
-    { id: 31, name: "Argentinian" },
-    { id: 32, name: "Middle Eastern" },
-    { id: 33, name: "Pakistani" },
-  ];
-
-  const filters = [
-    { id: 1, name: "Gluten-Free" },
-    { id: 2, name: "Keto" },
-    { id: 3, name: "High-Protein" },
-    { id: 4, name: "Low-Calorie" },
-    { id: 5, name: "Vegetarian" },
-    { id: 6, name: "Vegan" },
-    { id: 7, name: "Dairy-Free" },
-    { id: 8, name: "Nut-Free" },
-    { id: 9, name: "Sugar-Free" },
-    { id: 10, name: "Paleo" },
-    { id: 11, name: "Low-Carb" },
-    { id: 12, name: "Diabetic-Friendly" },
-    { id: 13, name: "Whole30" },
-    { id: 14, name: "Halal" },
-    { id: 15, name: "Kosher" },
-    { id: 16, name: "Fodmap-Friendly" },
-    { id: 17, name: "Soy-Free" },
-    { id: 18, name: "Wheat-Free" },
-    { id: 19, name: "Low-Fat" },
-    { id: 20, name: "Heart-Healthy" }
-  ];
-
-
   return (
     <View style={styles.container}>
       <View style={styles.upper}>
@@ -132,11 +75,15 @@ export default function ChooseFilter({ navigate }) {
       </View>
       
       <View style={styles.options}>
-          <View style={styles.dishOptions}>
-            <Text style={styles.dishOptionsText}>Dish</Text>
-          </View> 
-          <Icon name="people-outline" size={24}></Icon>
-          <Icon name="time-outline" size={24}></Icon>
+          <TestPage/>
+      </View>
+
+      <View style={styles.lower}>
+        <NextStepBtn
+          navigate={navigate} 
+          lowerText="Load Recipe"
+          navigateTo="TestPage" 
+        />
       </View>
     </View>
   );
@@ -233,13 +180,22 @@ const styles = StyleSheet.create({
   options: {
     paddingHorizontal: 32,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center"
   },
 
   dishOptionsText: {
     fontWeight: "bolder",
     fontSize: 16
-  }
+  },
+
+  //--------- Options ----------// 
+
+  lower: {
+    flex: 2,
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    padding: 32,
+  },
 
 });

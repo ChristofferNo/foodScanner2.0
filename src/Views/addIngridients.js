@@ -13,6 +13,7 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import GeneralButton from "../components/generalButton";
+import NextStepBtn from "../components/nextStepButton";
 
 const { width } = Dimensions.get("window");
 
@@ -117,17 +118,11 @@ export default function AddIngredient({ navigate }) {
 
       </View>
       <View style={styles.lower}>
-        <View style={styles.btnTextContainer}>
-          <Text style={styles.lowerText}>Choose filter and load recipe</Text>
-          <Pressable 
-            style={styles.nextStepBtn}
-            onPress={() => {
-                navigate("ChooseFilter");
-              }}
-            >
-            <Text style={styles.btnIcon}>&rarr;</Text>
-          </Pressable>
-        </View>
+        <NextStepBtn
+          navigate={navigate} // Skickar navigation-funktionen
+          lowerText="Choose filter and load recipe"
+          navigateTo="ChooseFilter" // Skärmen som ska navigeras till
+        />
       </View>
 
       {/* Modal */}
