@@ -22,8 +22,6 @@ export default function AddIngredient({ navigate }) {
   const containerPadding = 32;
   const modalInset = 32 + insets.top;
 
-  console.log("modalInset", modalInset);
-
   const [modalVisible, setModalVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(width)).current;
 
@@ -111,11 +109,7 @@ export default function AddIngredient({ navigate }) {
           </View>
         ))}
 
-        <GeneralButton
-          title="Add item"
-          onPress={openModal}
-        />
-
+        <GeneralButton title="Add item" onPress={openModal} />
       </View>
       <View style={styles.lower}>
         <NextStepBtn
@@ -222,7 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  
+
   lower: {
     flex: 2,
     alignItems: "flex-end",
