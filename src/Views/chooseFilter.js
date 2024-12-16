@@ -1,17 +1,35 @@
-import React from "react";
+import React, {useRef}  from "react";
 import {
   StyleSheet,
   View,
   Text,
   Pressable,
-  ScrollView, // Import från react-native, inte react-native-web
+  ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import NextStepBtn from "../components/nextStepButton";
-import TestPage from "./testPage";
 import { cuisines, filters } from "../models/cusineFilterData";
+import DropDown from "../components/dropDown";
+import Modal from "../components/modal";
 
 export default function ChooseFilter({ navigate }) {
+
+  const cuisineModalRef = useRef(null);
+  const filterModalRef = useRef(null);
+
+  const openCuisineModal = () => {
+    if (cuisineModalRef.current) {
+      cuisineModalRef.current.openModal();
+    }
+  };
+
+  const openFilterModal = () => {
+    if (filterModalRef.current) {
+      filterModalRef.current.openModal();
+    }
+  }
+
+
   return (
     <View style={styles.container}>
       <View style={styles.upper}>
@@ -24,11 +42,10 @@ export default function ChooseFilter({ navigate }) {
         </Pressable>
       </View>
 
-
       <View style={styles.cusine}>
         <View style={styles.textContainer}>
           <Text style={styles.header}>Cuisine</Text>
-          <Pressable>
+          <Pressable onPress={openCuisineModal}>
             <Text style={styles.viewAll}>View All</Text>
           </Pressable>
         </View>
@@ -53,11 +70,33 @@ export default function ChooseFilter({ navigate }) {
         </ScrollView>
       </View>
 
+      <Modal ref={cuisineModalRef} style={styles.cusineModal}>
+        <View style={styles.modalItemsContainer}>
+        {cuisines.map((item) => (
+          <Pressable style={styles.modalItem} key={item.id}>
+            <Text>{item.name}</Text>
+          </Pressable>
+        ))}
+        </View>
+      </Modal>
+
+      <Modal ref={filterModalRef} style={styles.cusineModal}>
+        <View style={styles.modalItemsContainer}>
+        {filters.map((item) => (
+          <Pressable style={styles.modalItem} key={item.id}>
+            <Text>{item.name}</Text>
+          </Pressable>
+        ))}
+        </View>
+      </Modal>
+
+
+
       <View style={styles.filter}>
 
       <View style={[styles.textContainer, styles.filterTextContainer]}>
           <Text style={styles.header}>Filter</Text>
-          <Pressable>
+          <Pressable onPress={openFilterModal}>
             <Text style={styles.viewAll}>View All</Text>
           </Pressable>
         </View>
@@ -75,7 +114,7 @@ export default function ChooseFilter({ navigate }) {
       </View>
       
       <View style={styles.options}>
-          <TestPage/>
+          <DropDown/>
       </View>
 
       <View style={styles.lower}>
@@ -163,14 +202,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 32,
+    gap: 10,
   },
 
   filterCard: {
     backgroundColor: "lightgrey",
     paddingVertical: 8,
     paddingHorizontal: 16,
-    marginRight: 8,
-    marginVertical: 4,
+    // marginRight: 8,
+    // marginVertical: 4,
     borderRadius: 16
   },
 
@@ -197,5 +237,24 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 32,
   },
+
+  //--------- Options ----------// 
+
+  modalItemsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    flexWrap: "wrap"
+  },
+  modalItem: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 100,
+    height: 75,
+    padding: 8,
+    backgroundColor: "lightgrey",
+    borderRadius: 8
+  }
 
 });

@@ -111,6 +111,8 @@ export default function AddIngredient({ navigate }) {
 
         <GeneralButton title="Add item" onPress={openModal} />
       </View>
+
+      {/* Next Step */}
       <View style={styles.lower}>
         <NextStepBtn
           navigate={navigate} // Skickar navigation-funktionen

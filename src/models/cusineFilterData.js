@@ -57,5 +57,6 @@ export const cuisines = [
     { id: 18, name: "Wheat-Free" },
     { id: 19, name: "Low-Fat" },
     { id: 20, name: "Heart-Healthy" },
+    { id: 21, name: "anti-inflamation" },
   ];
   
