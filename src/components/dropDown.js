@@ -3,11 +3,11 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; // Eller annan ikonbibliotek om du använder det
 
 const DropDown = () => {
-  // State för att hålla reda på de valda alternativen för varje menyval
+  
   const [selectedOptions, setSelectedOptions] = useState({
-    dish: "Lunch", // Förvalt alternativ istället för null
-    people: "2", // Förvalt alternativ istället för null
-    time: "30min", // Förvalt alternativ istället för null
+    dish: "Lunch", 
+    people: "2", 
+    time: "30min", 
   });
 
   // State för att kontrollera om en sektion är öppen
@@ -20,10 +20,10 @@ const DropDown = () => {
   // Toggle för att visa eller dölja alternativ baserat på vilken sektion som trycks
   const toggleVisibility = (option) => {
     setVisibleOptions((prev) => ({
-      dish: false,   // Stäng andra menyer
-      people: false, // Stäng andra menyer
-      time: false,   // Stäng andra menyer
-      [option]: !prev[option],  // Byt synlighet för den aktuella sektionen
+      dish: false,   
+      people: false, 
+      time: false,   
+      [option]: !prev[option],  
     }));
   };
 

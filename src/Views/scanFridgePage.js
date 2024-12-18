@@ -14,6 +14,7 @@ import {
   takePictureAsync,
 } from "expo-camera";
 import Icon from "react-native-vector-icons/Ionicons";
+import GoBackBtn from "../components/goBackBtn";
 
 const { width } = Dimensions.get("window");
 
@@ -57,15 +58,10 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
   }
   return (
     <View style={styles.scanFridgeContainer}>
-      <Pressable
-        style={styles.goBack}
-        onPress={() => {
-          navigate("HomePage");
-        }}
-      >
-        <Icon name="chevron-back-outline" size={24} />
-        <Text>Go Back</Text>
-      </Pressable>
+      <GoBackBtn
+        navigate={navigate}
+        navigateTo="HomePage"
+        />
       {!pictureUri && (
         <View style={styles.cameraContainer}>
           <CameraView

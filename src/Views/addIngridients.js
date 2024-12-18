@@ -14,6 +14,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import GeneralButton from "../components/generalButton";
 import NextStepBtn from "../components/nextStepButton";
+import GoBackBtn from "../components/goBackBtn";
 
 const { width } = Dimensions.get("window");
 
@@ -87,15 +88,9 @@ export default function AddIngredient({ navigate }) {
   return (
     <View style={[styles.container, { padding: containerPadding }]}>
       <View style={styles.upper}>
-        <Pressable
-          style={styles.goBack}
-          onPress={() => {
-            navigate("HomePage");
-          }}
-        >
-          <Icon name="chevron-back-outline" size={24} />
-          <Text>Go Back</Text>
-        </Pressable>
+        <GoBackBtn 
+          navigate={navigate} // Skickar navigation-funktionen
+          navigateTo="HomePage" />
       </View>
 
       <View style={styles.middle}>
@@ -193,23 +188,11 @@ const styles = StyleSheet.create({
   upper: {
     flex: 2,
   },
-
-  goBack: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    marginTop: 16,
-    backgroundColor: "white",
-  },
-
-  stepText: {
-    alignItems: "flex-start",
-    marginTop: 32,
-  },
   upperText: {
     textAlign: "center",
   },
 
+  
   middle: {
     flex: 4,
   },

@@ -7,7 +7,7 @@ import NavBar from "./src/components/bottomNavbar";
 import HomePage from "./src/Views/homePage";
 import ScanFridgePage from "./src/Views/scanFridgePage";
 import AddIngredient from "./src/Views/addIngridients";
-import ChooseFilter from "./src/Views/chooseFilter";
+import ChooseFilter from "./src/Views/chooseFilter/chooseFilter";
 import TestPage from "./src/Views/testPage";
 
 export default function App() {
