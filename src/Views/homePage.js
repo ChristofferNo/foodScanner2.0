@@ -29,15 +29,15 @@ export default function HomePage({ navigate }) {
 
 const styles = StyleSheet.create({
   homeContainer: {
-    flex: 1, // Gör att container fyller hela skärmen
-    justifyContent: "center", // Centrerar innehållet vertikalt
-    alignItems: "center", // Centrerar innehållet horisontellt
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center", 
     width: "100%",
   },
   upper: {
     flex: 2,
     flexDirection: "column",
-    justifyContent: "end",
+    justifyContent: "flex-end",
     alignItems: "center",
     width: "100%",
   },

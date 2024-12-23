@@ -80,8 +80,8 @@ export default function AddIngredient({ navigate }) {
       ...prevIngredients,
       ...modalIngredients,
     ]);
-    console.log("Updated realIngredients:", ingredients); // Note: Updated state won't appear immediately here
-    setModalIngredients([]); // Clear modal ingredients
+    console.log("Updated realIngredients:", ingredients); 
+    setModalIngredients([]); 
     closeModal();
   };
 
@@ -89,7 +89,7 @@ export default function AddIngredient({ navigate }) {
     <View style={[styles.container, { padding: containerPadding }]}>
       <View style={styles.upper}>
         <GoBackBtn 
-          navigate={navigate} // Skickar navigation-funktionen
+          navigate={navigate} 
           navigateTo="HomePage" />
       </View>
 
@@ -110,9 +110,9 @@ export default function AddIngredient({ navigate }) {
       {/* Next Step */}
       <View style={styles.lower}>
         <NextStepBtn
-          navigate={navigate} // Skickar navigation-funktionen
+          navigate={navigate} 
           lowerText="Choose filter and load recipe"
-          navigateTo="ChooseFilter" // Skärmen som ska navigeras till
+          navigateTo="ChooseFilter" 
         />
       </View>
 

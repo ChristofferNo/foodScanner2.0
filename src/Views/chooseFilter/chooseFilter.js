@@ -12,7 +12,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import NextStepBtn from "../../components/nextStepButton";
 import { cuisines, filters } from "../../models/cusineFilterData";
 import DropDown from "../../components/dropDown";
-import Modal from "../../components/modal";
+import DropDown from "../../components/dropDown";
 import CuisineModal from "./cusineModal";
 import FilterModal from "./filterModal";
 import GoBackBtn from "../../components/goBackBtn";
