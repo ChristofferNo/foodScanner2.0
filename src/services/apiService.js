@@ -23,6 +23,4 @@ const apiService = {
   },
 };
 
-module.exports = {
-  apiService,
-};
+export default apiService;

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -8,15 +8,34 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
 import NextStepBtn from "../../components/nextStepButton";
-import { cuisines, filters } from "../../models/cusineFilterData";
 import DropDown from "../../components/dropDown";
 import CuisineModal from "./cusineModal";
 import FilterModal from "./filterModal";
 import GoBackBtn from "../../components/goBackBtn";
+import apiService from "../../services/apiService";
 
 export default function ChooseFilter({ navigate }) {
+  // Fetch cuisnes and filters from mongo
+  const [cuisines, setCuisines] = useState([]);
+  const [filters, setFilters] = useState([]);
+
+  useEffect(() => {
+    const fetchCuisinesAndFilters = async () => {
+      try {
+        const cuisinesRes = await apiService.get("/mongo/get-cuisines");
+        setCuisines(cuisinesRes.data);
+        const filterRes = await apiService.get("/mongo/get-filters");
+        setFilters(filterRes.data);
+      } catch (err) {
+        setError("Failed to fetch cuisines");
+        console.error(err);
+      }
+    };
+
+    fetchCuisinesAndFilters();
+  }, []);
+
   const cuisineModalRef = useRef(null);
   const filterModalRef = useRef(null);
 
@@ -53,13 +72,13 @@ export default function ChooseFilter({ navigate }) {
           showsHorizontalScrollIndicator={false}
           style={styles.horizontalScroll}
         >
-          {cuisines.slice(0, 15).map((item) => (
+          {cuisines.slice(0, 15).map((item, i) => (
             <View
-              key={item.id}
+              key={item._id}
               style={[
                 styles.cuisineCard,
-                item.id === 1 && styles.first, // Lägg till extra stil för första elementet
-                item.id === 15 && styles.last,
+                i === 0 && styles.first, // Lägg till extra stil för första elementet
+                i === 14 && styles.last,
               ]}
             >
               <Text>{item.name}</Text>
@@ -72,40 +91,39 @@ export default function ChooseFilter({ navigate }) {
 
       {/* Filter */}
 
-        <View style={styles.filter}>
-          <View style={[styles.textContainer, styles.filterTextContainer]}>
-            <Text style={styles.header}>Filter</Text>
-            <Pressable onPress={openFilterModal}>
-              <Text style={styles.viewAll}>View All</Text>
-            </Pressable>
-          </View>
-          <View style={styles.filterCardContainer}>
-            {filters.slice(0, 9).map((item) => (
-              <View key={item.id} style={styles.filterCard}>
-                <Text>{item.name}</Text>
-              </View>
-            ))}
-          </View>
+      <View style={styles.filter}>
+        <View style={[styles.textContainer, styles.filterTextContainer]}>
+          <Text style={styles.header}>Filter</Text>
+          <Pressable onPress={openFilterModal}>
+            <Text style={styles.viewAll}>View All</Text>
+          </Pressable>
         </View>
-      
-
-        <FilterModal ref={filterModalRef} />
-
-        {/* Dropdown */}
-
-        <View style={styles.options}>
-          <DropDown />
+        <View style={styles.filterCardContainer}>
+          {filters.slice(0, 9).map((item) => (
+            <View key={item._id} style={styles.filterCard}>
+              <Text>{item.name}</Text>
+            </View>
+          ))}
         </View>
+      </View>
 
-        {/* nextBtn */}
+      <FilterModal ref={filterModalRef} />
 
-        <View style={styles.lower}>
-          <NextStepBtn
-            navigate={navigate}
-            lowerText="Load Recipe"
-            navigateTo="TestPage"
-          />
-        </View>
+      {/* Dropdown */}
+
+      <View style={styles.options}>
+        <DropDown />
+      </View>
+
+      {/* nextBtn */}
+
+      <View style={styles.lower}>
+        <NextStepBtn
+          navigate={navigate}
+          lowerText="Load Recipe"
+          navigateTo="TestPage"
+        />
+      </View>
     </View>
   );
 }
