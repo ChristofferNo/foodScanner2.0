@@ -72,8 +72,7 @@ export default function ChooseFilter({ navigate }) {
 
       {/* Filter */}
 
-      <View style={styles.filter}>
-        <View style={[styles.textContainer, styles.filterTextContainer]}>
+        <View style={styles.filter}>
           <View style={[styles.textContainer, styles.filterTextContainer]}>
             <Text style={styles.header}>Filter</Text>
             <Pressable onPress={openFilterModal}>
@@ -88,6 +87,7 @@ export default function ChooseFilter({ navigate }) {
             ))}
           </View>
         </View>
+      
 
         <FilterModal ref={filterModalRef} />
 
@@ -106,7 +106,6 @@ export default function ChooseFilter({ navigate }) {
             navigateTo="TestPage"
           />
         </View>
-      </View>
     </View>
   );
 }
