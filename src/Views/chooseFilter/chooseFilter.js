@@ -6,22 +6,17 @@ import {
   Pressable,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import NextStepBtn from "../../components/nextStepButton";
 import { cuisines, filters } from "../../models/cusineFilterData";
 import DropDown from "../../components/dropDown";
-import DropDown from "../../components/dropDown";
 import CuisineModal from "./cusineModal";
 import FilterModal from "./filterModal";
 import GoBackBtn from "../../components/goBackBtn";
 
-
-
-
 export default function ChooseFilter({ navigate }) {
-
   const cuisineModalRef = useRef(null);
   const filterModalRef = useRef(null);
 
@@ -35,14 +30,15 @@ export default function ChooseFilter({ navigate }) {
     if (filterModalRef.current) {
       filterModalRef.current.openModal();
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.upper}>
-        <GoBackBtn 
+        <GoBackBtn
           navigate={navigate} // Skickar navigation-funktionen
-          navigateTo="HomePage" />
+          navigateTo="HomePage"
+        />
       </View>
 
       <View style={styles.cusine}>
@@ -52,7 +48,6 @@ export default function ChooseFilter({ navigate }) {
             <Text style={styles.viewAll}>View All</Text>
           </Pressable>
         </View>
-
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -73,45 +68,44 @@ export default function ChooseFilter({ navigate }) {
         </ScrollView>
       </View>
 
-      <CuisineModal ref={cuisineModalRef}/>
+      <CuisineModal ref={cuisineModalRef} />
 
-            {/* Filter */}
+      {/* Filter */}
 
       <View style={styles.filter}>
         <View style={[styles.textContainer, styles.filterTextContainer]}>
-          <Text style={styles.header}>Filter</Text>
-          <Pressable onPress={openFilterModal}>
-            <Text style={styles.viewAll}>View All</Text>
-          </Pressable>
+          <View style={[styles.textContainer, styles.filterTextContainer]}>
+            <Text style={styles.header}>Filter</Text>
+            <Pressable onPress={openFilterModal}>
+              <Text style={styles.viewAll}>View All</Text>
+            </Pressable>
+          </View>
+          <View style={styles.filterCardContainer}>
+            {filters.slice(0, 9).map((item) => (
+              <View key={item.id} style={styles.filterCard}>
+                <Text>{item.name}</Text>
+              </View>
+            ))}
+          </View>
         </View>
-        <View style={styles.filterCardContainer}>
-          {filters.slice(0, 9).map((item) => (
-            <View
-              key={item.id}
-              style={styles.filterCard}
-            >
-              <Text>{item.name}</Text>
-            </View>
-          ))}
+
+        <FilterModal ref={filterModalRef} />
+
+        {/* Dropdown */}
+
+        <View style={styles.options}>
+          <DropDown />
         </View>
-      </View>
 
-      <FilterModal ref={filterModalRef}/>
+        {/* nextBtn */}
 
-      {/* Dropdown */}
-
-      <View style={styles.options}>
-        <DropDown />
-      </View>
-
-          {/* nextBtn */}
-
-      <View style={styles.lower}>
-        <NextStepBtn
-          navigate={navigate}
-          lowerText="Load Recipe"
-          navigateTo="TestPage"
-        />
+        <View style={styles.lower}>
+          <NextStepBtn
+            navigate={navigate}
+            lowerText="Load Recipe"
+            navigateTo="TestPage"
+          />
+        </View>
       </View>
     </View>
   );
@@ -136,11 +130,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
 
+  //---------Cusine----------//
 
-  //---------Cusine----------// 
-
-  cusine: {
-  },
+  cusine: {},
 
   textContainer: {
     flexDirection: "row",
@@ -168,15 +160,15 @@ const styles = StyleSheet.create({
 
   cuisineCard: {
     backgroundColor: "lightgrey",
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     height: 100,
     width: 100,
     marginRight: 4,
     borderRadius: 8,
   },
 
-  //---------Filter----------// 
+  //---------Filter----------//
 
   filter: {
     paddingHorizontal: 32,
@@ -199,13 +191,26 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgrey",
     paddingVertical: 8,
     paddingHorizontal: 16,
-    // marginRight: 8,
-    // marginVertical: 4,
-    borderRadius: 16
+    marginRight: 8,
+    marginVertical: 4,
+    borderRadius: 16,
   },
 
+  //--------- Options ----------//
 
-  //--------- lower ----------// 
+  options: {
+    paddingHorizontal: 32,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+
+  dishOptionsText: {
+    fontWeight: "bolder",
+    fontSize: 16,
+  },
+
+  //--------- Options ----------//
 
   lower: {
     flex: 2,
@@ -213,5 +218,4 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 32,
   },
-
 });

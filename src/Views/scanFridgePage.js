@@ -8,12 +8,9 @@ import {
   Image,
 } from "react-native";
 import { useEffect, useRef, useState } from "react";
-import {
-  useCameraPermissions,
-  CameraView,
-  takePictureAsync,
-} from "expo-camera";
+import { useCameraPermissions, CameraView } from "expo-camera";
 import Icon from "react-native-vector-icons/Ionicons";
+import apiService from "../services/apiService";
 import GoBackBtn from "../components/goBackBtn";
 
 const { width } = Dimensions.get("window");
@@ -35,8 +32,12 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
     return () => showNavbar(true); // <-- Cleanup function that will run when the component is unmounted.
   }, [showNavbar]); // <-- Dependecy array that triggers useEffect every time one of the variables in the array changes, in this case the showNavbar.
 
-  const [permission, requestPermission] = useCameraPermissions();
+  const sendPictureToScan = () => {
+    const res = apiService.post("/chatgpt/scan-fridge");
+    console.log("response from chat backend", res);
+  };
 
+  const [permission, requestPermission] = useCameraPermissions();
   if (!permission) {
     return (
       <View>
@@ -58,10 +59,7 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
   }
   return (
     <View style={styles.scanFridgeContainer}>
-      <GoBackBtn
-        navigate={navigate}
-        navigateTo="HomePage"
-        />
+      <GoBackBtn navigate={navigate} navigateTo="HomePage" />
       {!pictureUri && (
         <View style={styles.cameraContainer}>
           <CameraView
@@ -84,7 +82,7 @@ export default function ScanFridgePage({ showNavbar, navigate }) {
             <Pressable style={styles.btn} onPress={() => {}}>
               <Icon name="reload" size={32} color={"lightgrey"}></Icon>
             </Pressable>
-            <Pressable style={styles.btn} onPress={() => {}}>
+            <Pressable style={styles.btn} onPress={() => sendPictureToScan()}>
               <Icon name="arrow-forward" size={32} color={"lightgrey"}></Icon>
             </Pressable>
           </View>
